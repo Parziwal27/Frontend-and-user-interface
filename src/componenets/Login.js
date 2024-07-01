@@ -23,8 +23,14 @@ const Login = ({ onLoginSuccess }) => {
       const token = response.data.access_token;
       onLoginSuccess(token);
       setError(null);
-    } catch (error) {
-      setError("Error logging in");
+    } catch (err) {
+      if (err.response) {
+        // If the error response from the backend exists, use the message from the backend
+        setError(err.response.data.msg);
+      } else {
+        // Fallback error message if there is no response from the backend
+        setError("Error logging in");
+      }
     }
   };
 
