@@ -1,6 +1,7 @@
 import React from "react";
-import { Grid, Paper, Typography, Box, Button } from "@mui/material";
+import { Grid, Paper, Typography, Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const options = [
   { title: "View All Policy Holders", path: "/all-policy-holders" },
@@ -21,6 +22,22 @@ const Dashboard = () => {
 
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          mb: 2,
+          cursor: "pointer",
+        }}
+        onClick={handleLogout}>
+        <IconButton color="inherit">
+          <ExitToAppIcon />
+        </IconButton>
+        <Typography variant="subtitle1" color="inherit" sx={{ ml: 1 }}>
+          Logout
+        </Typography>
+      </Box>
       <Typography variant="h4" gutterBottom component="div">
         Dashboard
       </Typography>
@@ -46,26 +63,6 @@ const Dashboard = () => {
             </Paper>
           </Grid>
         ))}
-        <Grid item xs={12} sm={6}>
-          <Paper
-            sx={{
-              p: 3,
-              textAlign: "center",
-              cursor: "pointer",
-              height: "150px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "secondary.main",
-              color: "secondary.contrastText",
-              "&:hover": {
-                backgroundColor: "secondary.dark",
-              },
-            }}
-            onClick={handleLogout}>
-            <Typography variant="h6">Logout</Typography>
-          </Paper>
-        </Grid>
       </Grid>
     </Box>
   );
