@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Paper, Typography, Box } from "@mui/material";
+import { Grid, Paper, Typography, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const options = [
@@ -11,6 +11,12 @@ const options = [
 
 const Dashboard = () => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Perform logout actions here (e.g., clear authentication tokens, reset session)
+    // For example, redirecting to login page in a SPA:
+    navigate("/login");
+  };
 
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
@@ -39,6 +45,26 @@ const Dashboard = () => {
             </Paper>
           </Grid>
         ))}
+        <Grid item xs={12} sm={6}>
+          <Paper
+            sx={{
+              p: 3,
+              textAlign: "center",
+              cursor: "pointer",
+              height: "150px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "secondary.main",
+              color: "secondary.contrastText",
+              "&:hover": {
+                backgroundColor: "secondary.dark",
+              },
+            }}
+            onClick={handleLogout}>
+            <Typography variant="h6">Logout</Typography>
+          </Paper>
+        </Grid>
       </Grid>
     </Box>
   );
