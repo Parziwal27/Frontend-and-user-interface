@@ -24,12 +24,16 @@ const Login = ({ onLoginSuccess }) => {
       onLoginSuccess(token);
       setError(null);
     } catch (err) {
-      if (err.response) {
-        // If the error response from the backend exists, use the message from the backend
-        setError(err.response.data.msg);
+      console.error("Login error:", err);
+      if (err.response && err.response.data) {
+        // If there's a response from the server with data
+        setError(err.response.data.msg || "An error occurred during login");
+      } else if (err.request) {
+        // The request was made but no response was received
+        setError("No response received from the server");
       } else {
-        // Fallback error message if there is no response from the backend
-        setError("Error logging in");
+        // Something happened in setting up the request that triggered an Error
+        setError("Error setting up the request");
       }
     }
   };
