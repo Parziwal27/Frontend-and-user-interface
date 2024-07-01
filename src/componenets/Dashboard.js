@@ -16,6 +16,7 @@ const Dashboard = () => {
     // Perform logout actions here (e.g., clear authentication tokens, reset session)
     // For example, redirecting to login page in a SPA:
     navigate("/login");
+    window.location.reload();
   };
 
   return (
