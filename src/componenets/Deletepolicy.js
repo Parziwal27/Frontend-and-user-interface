@@ -58,16 +58,7 @@ const DeletePolicy = ({ token }) => {
       }
       setMessage(response.data.message);
     } catch (err) {
-      console.error("Delete policy error:", err);
-      if (err.response && err.response.data) {
-        setError(
-          err.response.data.message || "An error occurred during delete policy"
-        );
-      } else if (err.request) {
-        setError("No response received from the server");
-      } else {
-        setError("Error setting up the request");
-      }
+      setError("Error Deleting: " + err.message);
     }
   };
 
@@ -133,14 +124,6 @@ const DeletePolicy = ({ token }) => {
                 sx={{ mt: 2 }}>
                 Fetch Policies
               </Button>
-              <TextField
-                fullWidth
-                label="Policy Name"
-                value={policyName}
-                onChange={(e) => setPolicyName(e.target.value)}
-                margin="normal"
-                required
-              />
               {policies.length > 0 && (
                 <Box sx={{ mt: 2 }}>
                   <Typography variant="h6" gutterBottom>
@@ -155,6 +138,14 @@ const DeletePolicy = ({ token }) => {
                   </List>
                 </Box>
               )}
+              <TextField
+                fullWidth
+                label="Policy Name"
+                value={policyName}
+                onChange={(e) => setPolicyName(e.target.value)}
+                margin="normal"
+                required
+              />
             </>
           )}
           <Button type="submit" variant="contained" sx={{ mt: 2 }}>
