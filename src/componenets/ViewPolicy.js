@@ -35,7 +35,7 @@ const ViewPolicy = ({ token }) => {
     } catch (err) {
       console.error("View Policy error:", err);
       if (err.response && err.response.data) {
-        setError(err.response.data.msg || "An error occurred during login");
+        setError(err.response.data.message || "An error occurred during login");
       } else if (err.request) {
         setError("No response received from the server");
       } else {
