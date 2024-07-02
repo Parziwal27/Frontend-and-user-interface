@@ -32,7 +32,7 @@ const PolicyOptions = () => {
             fullWidth
             variant="contained"
             onClick={() => navigate("/delete-policy")}>
-            Delete Policy
+            Delete Policy/PolicyHolder
           </Button>
         </Grid>
       </Grid>
