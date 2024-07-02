@@ -34,7 +34,16 @@ const UpdatePolicy = ({ token }) => {
       );
       setMessage(response.data.message);
     } catch (err) {
-      setError("Error Updating Policy: " + err.message);
+      console.error("update policy error:", err);
+      if (err.response && err.response.data) {
+        setError(
+          err.response.data.message || "An error occurred during update policy"
+        );
+      } else if (err.request) {
+        setError("No response received from the server");
+      } else {
+        setError("Error setting up the request");
+      }
     }
   };
 
