@@ -33,6 +33,8 @@ const UpdatePolicy = ({ token }) => {
         }
       );
       setMessage(response.data.message);
+      setName("");
+      setNewPolicy("");
     } catch (err) {
       console.error("update policy error:", err);
       if (err.response && err.response.data) {

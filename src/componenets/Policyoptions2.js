@@ -16,7 +16,7 @@ const PolicyOptions = () => {
             fullWidth
             variant="contained"
             onClick={() => navigate("/update-policy")}>
-            Add Policy
+            Update Policy
           </Button>
         </Grid>
         <Grid item xs={12}>
