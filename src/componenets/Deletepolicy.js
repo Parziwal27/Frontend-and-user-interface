@@ -22,6 +22,7 @@ const DeletePolicy = ({ token }) => {
   const [policyName, setPolicyName] = useState("");
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
+  const [policies, setPolicies] = useState([]);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -57,7 +58,32 @@ const DeletePolicy = ({ token }) => {
       }
       setMessage(response.data.message);
     } catch (err) {
-      setError("Error Deleting: " + err.message);
+      console.error("Delete policy error:", err);
+      if (err.response && err.response.data) {
+        setError(
+          err.response.data.message || "An error occurred during delete policy"
+        );
+      } else if (err.request) {
+        setError("No response received from the server");
+      } else {
+        setError("Error setting up the request");
+      }
+    }
+  };
+
+  const handleFetchPolicies = async () => {
+    try {
+      const response = await axios.get(
+        `https://securing-and-documenting-the-api.onrender.com/api/policyholder/${name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setPolicies(response.data.policies);
+    } catch (err) {
+      setError("Error fetching policies: " + err.message);
     }
   };
 
@@ -100,14 +126,36 @@ const DeletePolicy = ({ token }) => {
             required
           />
           {choice === "policy" && (
-            <TextField
-              fullWidth
-              label="Policy Name"
-              value={policyName}
-              onChange={(e) => setPolicyName(e.target.value)}
-              margin="normal"
-              required
-            />
+            <>
+              <Button
+                variant="outlined"
+                onClick={handleFetchPolicies}
+                sx={{ mt: 2 }}>
+                Fetch Policies
+              </Button>
+              <TextField
+                fullWidth
+                label="Policy Name"
+                value={policyName}
+                onChange={(e) => setPolicyName(e.target.value)}
+                margin="normal"
+                required
+              />
+              {policies.length > 0 && (
+                <Box sx={{ mt: 2 }}>
+                  <Typography variant="h6" gutterBottom>
+                    Available Policies:
+                  </Typography>
+                  <List>
+                    {policies.map((policy) => (
+                      <ListItem key={policy}>
+                        <ListItemText primary={policy} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              )}
+            </>
           )}
           <Button type="submit" variant="contained" sx={{ mt: 2 }}>
             {choice === "policyholder"
