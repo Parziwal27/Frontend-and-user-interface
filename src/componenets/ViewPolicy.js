@@ -33,7 +33,14 @@ const ViewPolicy = ({ token }) => {
       );
       setPolicyHolder(response.data);
     } catch (err) {
-      setError("Error fetching policy: " + err.message);
+      console.error("View Policy error:", err);
+      if (err.response && err.response.data) {
+        setError(err.response.data.msg || "An error occurred during login");
+      } else if (err.request) {
+        setError("No response received from the server");
+      } else {
+        setError("Error setting up the request");
+      }
     }
   };
 
