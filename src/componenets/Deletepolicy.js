@@ -58,7 +58,16 @@ const DeletePolicy = ({ token }) => {
       }
       setMessage(response.data.message);
     } catch (err) {
-      setError("Error Deleting: " + err.message);
+      console.error("Delete policy error:", err);
+      if (err.response && err.response.data) {
+        setError(
+          err.response.data.message || "An error occurred during delete policy"
+        );
+      } else if (err.request) {
+        setError("No response received from the server");
+      } else {
+        setError("Error setting up the request");
+      }
     }
   };
 
