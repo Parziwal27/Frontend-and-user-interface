@@ -17,6 +17,7 @@ import ViewPolicy from "./componenets/ViewPolicy.js";
 import DeletePolicy from "./componenets/Deletepolicy.js";
 import FetchPolicy from "./componenets/FetchPolicyHolder.js";
 import SubmitClaim from "./componenets/SubmitClaim.js";
+import UpdatePolicy from "./componenets/UpdatePolicy.js";
 import { Container, Typography, Box, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -147,6 +148,16 @@ const App = () => {
                 element={
                   isLoggedIn ? (
                     <FetchPolicy token={token} />
+                  ) : (
+                    <Navigate to="/" replace />
+                  )
+                }
+              />
+              <Route
+                path="/update-policy"
+                element={
+                  isLoggedIn ? (
+                    <UpdatePolicy token={token} />
                   ) : (
                     <Navigate to="/" replace />
                   )

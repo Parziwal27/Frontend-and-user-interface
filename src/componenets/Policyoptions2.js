@@ -15,7 +15,7 @@ const PolicyOptions = () => {
           <Button
             fullWidth
             variant="contained"
-            onClick={() => navigate("/add-policy")}>
+            onClick={() => navigate("/update-policy")}>
             Add Policy
           </Button>
         </Grid>
