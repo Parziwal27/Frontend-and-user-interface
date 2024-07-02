@@ -54,9 +54,11 @@ const ViewPolicy = ({ token }) => {
         margin="normal"
         required
       />
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-        View Policy
-      </Button>
+      <Box sx={{ mt: 2 }}>
+        <Button type="submit" variant="contained">
+          View Policy
+        </Button>
+      </Box>
       {error && (
         <Typography color="error" sx={{ mt: 2 }}>
           {error}
@@ -81,13 +83,14 @@ const ViewPolicy = ({ token }) => {
           </List>
         </Box>
       )}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleDashboardRedirect}
-        sx={{ mt: 2 }}>
-        Back to Dashboard
-      </Button>
+      <Box sx={{ mt: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleDashboardRedirect}>
+          Back to Dashboard
+        </Button>
+      </Box>
     </Box>
   );
 };
